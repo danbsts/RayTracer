@@ -8,12 +8,32 @@ struct hit_record;
 
 using namespace std;
 
+vec3 random_in_unit_sphere() {
+    vec3 p;
+    do {
+        p = 2.0*vec3(drand48(), drand48(), drand48()) - vec3(1,1,1);
+    } while (p.squared_length() >= 1.0);
+    return p;
+}
 
 class material {
     public:
         material() {}
-        material(vec3 c, float e, float d, float s, float al) : color(c), ke(e), ks(s), kd(d), alpha(al) {}
+        material(vec3 c, float e, float d, float s, float al) : color(c), ke(e), ks(s), kd(d), alpha(al), albedo(vec3(0,0,0)) {}
+        material(vec3 c, float e, float d, float s, float al, vec3 alb) : color(c), ke(e), ks(s), kd(d), alpha(al), albedo(alb) {}
 
+        virtual bool scatter(const ray& r_in, const hit_record& rec, vec3& attenuation, ray& scattered) const {
+            if(albedo.x() == 0 && albedo.y() == 0 && albedo.z() == 0) {
+                return false;
+            }
+            //vec3 target = rec.p + rec.normal + random_in_unit_sphere();
+            vec3 target = rec.p + rec.normal;
+            scattered = ray(rec.p, target-rec.p);
+            attenuation = albedo;
+            return true;
+        }
+
+        vec3 albedo;
         vec3 color;
         float ke;
         float ks;
