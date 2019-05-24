@@ -19,7 +19,7 @@ Os materiais devem ter (ao menos) os seguintes parâmetros:
 Parte Extra:
 
 ✓ Sombra (1pt)
-Reflexoes perfeitas (1pt)
+✓ Reflexoes perfeitas (1pt)
 Refracoes perfeitas (2pts)
 Color Bleeding - Difusao global (2pts)
 ✓ Depth of field (1pt)
@@ -27,4 +27,4 @@ Luz em area - Soft Shadows (1pt)
 Malhas Triangulares (2pts)
 
 
-Total de pontos ate agora: 9
+Total de pontos ate agora: 10
