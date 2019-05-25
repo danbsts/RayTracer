@@ -1,8 +1,11 @@
 res 400 200 100
-camera 10 10 10 0 0 0 0 1 0 60 0.2
+camera 2 2 4 0 0 0 0 1 0 60 0.2
 material vidro 255 255 255 0.8 0.7 0.4 0.1
 material madeira 200 100 23 0.8 0.7 0.4 0.1
-sphere 5 0 0 1 madeira
-sphere 2 0 0 1 madeira
-sphere 0 0 1 1 madeira
+material branco 255 255 255 0.7 0.0 0.8 0.1
+material vermelho 170 23 23 1.0 0.9 0.1 0.1
+sphere 0 0 0 1 vermelho
+sphere 2 0 0 1 vidro
+sphere -2 0 0 1 vidro
+sphere 0 -1001 0 1000 branco
 fim
