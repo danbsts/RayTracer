@@ -1,0 +1,11 @@
+res 400 200 100
+camera -5.7 0.7 -2.5 -2.7 0.7 -3 0 1 0 50 0.01
+material vidro 255 255 255 0.5 10.6 0.1 0.3
+material branco 255 229 204 0.5 0.6 0.5 1.0
+material verde 36 130 51 0.5 10.6 0.1 1.119
+material vermelho 170 23 23 1.0 0.6 0.1 0.9
+sphere -2.7 0.7 -3 0.7 vermelho
+sphere 0.7 0.7 -1 0.7 vidro
+sphere 0.7 -1000 -1 1000 branco
+sphere 0.7 0.7 -0.1 0.1 verde
+fim

@@ -7,37 +7,6 @@
 
 using namespace std;
 
-vec3 color(const ray& r, const hitable *world, const materialLight& light, const camera& view, int depth) {
-    hit_record rec;
-    if(world->hit(r, 0.001, FLT_MAX, rec)) {
-        hit_record hitted;
-        ray scattered;
-        vec3 attenuation;
-        if(depth < 10) {
-            if(rec.mat_ptr->scatter(r, rec, attenuation, scattered)) {
-                return attenuation*color(scattered, world, light, view, depth+1);
-            } else { 
-                if(world->hit(ray(rec.p, light.position-rec.p), 0.001, FLT_MAX, hitted)) {
-                    return vec3(0,0,0);
-                } else {
-                    return phong(light, rec, view);
-                }
-            }
-        } else {
-            if(world->hit(ray(rec.p, light.position-rec.p), 0.001, FLT_MAX, hitted)) {
-                 //return phong(light, rec, view);
-                 return vec3(0.0, 0.0, 0.0);
-            } else {
-                return phong(light, rec, view);
-            }
-        }
-    }
-
-    vec3 unit_direction = unit_vector(r.direction());
-    float t = 0.5*(unit_direction.y()+1.0);
-    return (1.0-t)*vec3(0,0,0) + t*vec3(0.5, 0.7, 1.0);
-}
-
 int main() {
     int nx = 1000;
     int ny = 500;
@@ -45,6 +14,7 @@ int main() {
     printf("P3\n%i %i\n255\n", nx, ny);
     hitable *list[4];
     float R = cos(M_PI/4.0);
+    cerr << R << endl;
     // materia(cor, ke, kd, ks, alpha)
     list[0] = new sphere(vec3(-R-2, R, -3), R, new material(vec3(0.67, 0.09, 0.09), 0.1, 1.0, 0.6, 0.9)); //vermelha
     list[1] = new sphere(vec3(R,R,-1.0), R, new material(vec3(1, 1, 1), 0.1, 0.5, 10.6, 0.3, vec3(1,1,1))); //branca - vidro
