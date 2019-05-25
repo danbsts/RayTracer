@@ -1,7 +1,8 @@
-res 1366 768
-camera 1 1 1 0 0 0 0 1 0 50 1366/768
+res 400 200
+camera 1 10 1 0 0 0 0 1 0 60 0.2
 material vidro 255 255 255 0.8 0.7 0.4 0.1
 material madeira 200 100 23 0.8 0.7 0.4 0.1
 sphere 0 0 0 1 madeira
 sphere 1 0 0 1 vidro
 sphere 0 0 1 1 vidro
+fim

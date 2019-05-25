@@ -82,4 +82,36 @@ vec3 phong(materialLight light, const hit_record& rec, const camera& view) {
     //return emissive;
     return emissive + diffuse + specular;
 }
+
+vec3 color(const ray& r, const hitable *world, const materialLight& light, const camera& view, int depth) {
+    hit_record rec;
+    if(world->hit(r, 0.001, FLT_MAX, rec)) {
+        hit_record hitted;
+        ray scattered;
+        vec3 attenuation;
+        if(depth < 10) {
+            if(rec.mat_ptr->scatter(r, rec, attenuation, scattered)) {
+                return attenuation*color(scattered, world, light, view, depth+1);
+            } else { 
+                if(world->hit(ray(rec.p, light.position-rec.p), 0.001, FLT_MAX, hitted)) {
+                    return vec3(0,0,0);
+                } else {
+                    return phong(light, rec, view);
+                }
+            }
+        } else {
+            if(world->hit(ray(rec.p, light.position-rec.p), 0.001, FLT_MAX, hitted)) {
+                 //return phong(light, rec, view);
+                 return vec3(0.0, 0.0, 0.0);
+            } else {
+                return phong(light, rec, view);
+            }
+        }
+    }
+
+    vec3 unit_direction = unit_vector(r.direction());
+    float t = 0.5*(unit_direction.y()+1.0);
+    return (1.0-t)*vec3(0,0,0) + t*vec3(0.5, 0.7, 1.0);
+}
+
 #endif
