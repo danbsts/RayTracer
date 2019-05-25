@@ -61,12 +61,12 @@ int main() {
         newMat.ke = e;
         newMat.ks = s;
         newMat.alpha = alp;
-        materials[name] = newMat;
         if(name == "vidro") {
             newMat.albedo = vec3(1,1,1);
         } else {
             newMat.albedo = vec3(0,0,0);
         }
+        materials[name] = newMat;
         inFile >> read;
     }
     vector<sphere> spheres;
@@ -82,13 +82,16 @@ int main() {
         material& thisMat = materials[matName];
         //cerr << thisMat.color << endl;
         newSphere.mat_ptr = new material(thisMat.color, thisMat.ke, thisMat.kd, thisMat.ks, thisMat.alpha, thisMat.albedo);
+        spheres.push_back(newSphere);
         inFile >> read;
     }
     inFile.close();
     int numItens = spheres.size();
     hitable *list[numItens];
+    cerr << numItens << endl;
     for(int i = 0; i < spheres.size(); i++) {
         list[i] = new sphere(spheres[i].center, spheres[i].radius, spheres[i].mat_ptr);
+        cerr << spheres[i].center << endl;
     }
     //offstream outFile;
     //outFile.open("../out/img.")
@@ -106,8 +109,8 @@ int main() {
     //float dist_to_focus = (lookfrom-lookat).length();
     //float aperture = 0.01;
     //int fov = 50;
-    //camera cam(lookfrom, lookat, vec3(0,1,0), fov, float(nx)/float(ny), aperture, dist_to_focus);
-    materialLight light(vec3(1.0, 1.0, 1.0), vec3(-10.0, 1000.0, -1.0));
+    //camera view2(lookfrom, lookat, vec3(0,1,0), fov, float(nx)/float(ny), 0.2, focusDist);
+    materialLight light(vec3(1.0, 1.0, 1.0), vec3(-10.0, 100.0, -1.0));
     for(int i = ny-1; i > -1; i--) {
         for(int j = 0; j < nx; j++) {
             vec3 col(0,0,0);
