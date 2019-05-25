@@ -3,6 +3,6 @@ camera 10 10 10 0 0 0 0 1 0 60 0.2
 material vidro 255 255 255 0.8 0.7 0.4 0.1
 material madeira 200 100 23 0.8 0.7 0.4 0.1
 sphere 5 0 0 1 madeira
-sphere 2 0 0 1 vidro
-sphere 0 0 1 1 vidro
+sphere 2 0 0 1 madeira
+sphere 0 0 1 1 madeira
 fim

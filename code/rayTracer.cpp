@@ -8,14 +8,6 @@
 
 using namespace std;
 
-struct materialBuilder{
-    vec3 color;
-    float ke;
-    float kd;
-    float ks;
-    float alpha;
-};
-
 int main() {
     string fileName;
     cerr << "Por favor digite o nome do arquivo a ser aberto:" << endl;
@@ -91,7 +83,7 @@ int main() {
     cerr << numItens << endl;
     for(int i = 0; i < spheres.size(); i++) {
         list[i] = new sphere(spheres[i].center, spheres[i].radius, spheres[i].mat_ptr);
-        cerr << spheres[i].center << endl;
+        cerr << spheres[i].center << " " << spheres[i].radius << " "  << spheres[i].mat_ptr->albedo<< endl;
     }
     //offstream outFile;
     //outFile.open("../out/img.")
