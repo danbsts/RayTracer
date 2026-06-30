@@ -1,4 +1,10 @@
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <cfloat>
+#include <cstdint>
+#include <iostream>
+#include "lib/rng.h"
 #include "lib/sphere.h"
 #include "lib/hitable_list.h"
 #include "lib/camera.h"
@@ -31,12 +37,13 @@ int main() {
     materialLight light(vec3(1.0, 1.0, 1.0), vec3(-10.0, 1000.0, -1.0));
     for(int i = ny-1; i > -1; i--) {
         for(int j = 0; j < nx; j++) {
+            RNG rng((uint32_t)i * (uint32_t)nx + (uint32_t)j + 1u);
             vec3 col(0,0,0);
             for(int s = 0; s < ns; s++) {
-                float u = float (j+ drand48()) / float(nx);
-                float v = float (i+ drand48()) / float(ny);
-                ray r = cam.get_ray(u, v);
-                col += color(r, world, light, cam, 0);
+                float u = float (j+ rng()) / float(nx);
+                float v = float (i+ rng()) / float(ny);
+                ray r = cam.get_ray(u, v, rng);
+                col += color(r, world, light, cam, 0, rng);
             }
             col /= float(ns);
             col = vec3(sqrt(col[0]), sqrt(col[1]), sqrt(col[2]));

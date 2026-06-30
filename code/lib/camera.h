@@ -2,11 +2,12 @@
 #define CAMERAH
 
 #include "ray.h"
+#include "rng.h"
 
-vec3 random_in_unit_disk() {
+vec3 random_in_unit_disk(RNG& rng) {
     vec3 p;
     do {
-        p = 2.0*vec3(drand48(), drand48(), 0) - vec3(1,1,0);
+        p = 2.0*vec3(rng(), rng(), 0) - vec3(1,1,0);
     } while(dot(p,p) >= 1.0);
     return p;
 }
@@ -26,8 +27,8 @@ class camera {
             horizontal = (2*half_width*u*focus_dist);
             vertical = (2*half_height*v*focus_dist);
         }
-        ray get_ray(float s, float t) {
-            vec3 rd = lens_radius*random_in_unit_disk();
+        ray get_ray(float s, float t, RNG& rng) {
+            vec3 rd = lens_radius*random_in_unit_disk(rng);
             vec3 offset = u * rd.x() + v * rd.y();
             return ray(origin + offset, lower_left_corner + s*horizontal + t*vertical - origin - offset);
         }
