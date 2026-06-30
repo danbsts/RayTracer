@@ -1,0 +1,10 @@
+res 600 400 60
+camera 5 3 8 0 0.5 0 0 1 0 50 0.04
+material vermelho 200 40 40 0.8 0.6 0.2 0.2
+material azul 50 90 210 0.8 0.6 0.2 0.2
+material amarelo 230 200 40 0.8 0.6 0.2 0.3
+sphere -2 0 0 1 vermelho
+cube 1 -0.3 0 1.4 azul
+sphere 2.6 -0.2 -1 0.8 amarelo
+mirror 0 -1 0 0 1 0
+fim
